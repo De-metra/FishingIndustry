@@ -1,0 +1,86 @@
+﻿@model FishingIndustry.ViewModels.FishingZoneViewModel
+
+@{
+    ViewData["Title"] = "Редактировать";
+}
+
+<h1>Редактировать</h1>
+
+<hr />
+<div class="row">
+    <div class="col-md-6">
+        <form asp-action="Edit" method="post" enctype="multipart/form-data">
+            <input type="hidden" asp-for="Id" />
+
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+            <div class="form-group">
+                <label asp-for="Name" class="control-label">Название</label>
+                <input asp-for="Name" class="form-control" />
+                <span asp-validation-for="Name" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="Latitude" class="control-label">Широта</label>
+                <input asp-for="Latitude" class="form-control" />
+            </div>
+
+            <div class="form-group">
+                <label asp-for="Longitude" class="control-label">Долгота</label>
+                <input asp-for="Longitude" class="form-control" />
+            </div>
+
+            <div class="form-group">
+                <label asp-for="Description" class="control-label">Описание</label>
+                <input asp-for="Description" class="form-control" />
+                <span asp-validation-for="Description" class="text-danger"></span>
+            </div>
+
+
+            <div class="form-group">
+                <label>Виды рыб</label>
+                @if (Model.AvailableFishTypes != null && Model.AvailableFishTypes.Any())
+                {
+                @foreach (var fish in Model.AvailableFishTypes)
+                {
+                    <div class="form-check">
+                        <input class="form-check-input"
+                               type="checkbox"
+                               value="@fish.Value"
+                               name="SelectedFishTypeIds"
+                               id="fish_@fish.Value"
+                        @(Model.SelectedFishTypeIds.Contains(int.Parse(fish.Value)) ? "checked" : "") />
+                        <label class="form-check-label" for="fish_@fish.Value">@fish.Text</label>
+                    </div>
+                }
+                }
+                else
+                {
+                    <p class="text-muted">Нет доступных видов рыб</p>
+                }
+
+            </div>
+
+
+            <div class="form-group">
+                <label asp-for="ImageUpload" class="control-label">Новое изображение</label>
+                <input asp-for="ImageUpload" type="file" class="form-control" />
+                <span asp-validation-for="ImageUpload" class="text-danger"></span>
+            </div>
+
+            <div class="form-group mt-3">
+                <input type="submit" value="Сохранить" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div class="mt-3">
+    <a asp-action="Index" class="btn btn-secondary">Назад</a>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

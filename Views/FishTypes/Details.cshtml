@@ -1,0 +1,65 @@
+﻿@model FishingIndustry.Models.FishType
+
+@{
+    ViewData["Title"] = "Детали";
+}
+
+<h1>Информация о рыбе</h1>
+
+<div class="row">
+    <div class="col-md-6">
+        <dl class="row">
+            <dt class="col-sm-4">Название</dt>
+            <dd class="col-sm-8">@Model.Name</dd>
+
+            <dt class="col-sm-4">Описание</dt>
+            <dd class="col-sm-8">@Model.Description</dd>
+
+            <dt class="col-sm-4">Семейство</dt>
+            <dd class="col-sm-8">@Model.Family</dd>
+
+            <dt class="col-sm-4">Место обитания</dt>
+            <dd class="col-sm-8">@Model.HabitatType</dd>
+
+            <dt class="col-sm-4">Цена за кг</dt>
+            <dd class="col-sm-8">@Model.AveragePricePerKg ₽</dd>
+
+            <dt class="col-sm-4">Рыболовные зоны</dt>
+            <dd class="col-sm-8">
+                @if (Model.FishingZones != null && Model.FishingZones.Any())
+                {
+                    <ul class="list-unstyled">
+                        @foreach (var zone in Model.FishingZones)
+                        {
+                            <li>
+                                <a asp-controller="FishingZones" asp-action="Details" asp-route-id="@zone.Id">
+                                    @zone.Name
+                                </a>
+                            </li>
+                        }
+                    </ul>
+                }
+                else
+                {
+                    <span class="text-muted">Не указаны</span>
+                }
+            </dd>
+        </dl>
+    </div>
+
+    <div class="col-md-6">
+        @if (!string.IsNullOrEmpty(Model.ImagePath))
+        {
+            <img src="@Model.ImagePath" alt="@Model.Name" class="img-fluid rounded border" style="max-height: 400px;" />
+        }
+        else
+        {
+            <p class="text-muted">Изображение не загружено</p>
+        }
+    </div>
+</div>
+
+<div class="mt-4">
+    <a asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-primary">Редактировать</a>
+    <a asp-action="Index" class="btn btn-secondary">Назад</a>
+</div>

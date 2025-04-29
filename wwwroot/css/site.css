@@ -1,0 +1,114 @@
+html {
+  font-size: 14px;
+}
+
+@media (min-width: 768px) {
+  html {
+    font-size: 16px;
+  }
+}
+
+.btn:focus, .btn:active:focus, .btn-link.nav-link:focus, .form-control:focus, .form-check-input:focus {
+  box-shadow: 0 0 0 0.1rem white, 0 0 0 0.25rem #258cfb;
+}
+
+html {
+  position: relative;
+  min-height: 100%;
+}
+
+
+:root {
+    --primary-blue: #2A4B8D;
+    --secondary-blue: #3A6EC6;
+    --accent-orange: #F39C12;
+    --dark-bg: #1A2B4A;
+    --light-bg: #F5F7FA;
+    --text-dark: #333333;
+    --text-light: #FFFFFF;
+}
+
+/* Базовые стили */
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: var(--light-bg);
+    color: var(--text-dark);
+    line-height: 1.6;
+    margin-bottom: 60px;
+}
+
+/* Навигационная панель (из Figma) */
+.navbar {
+    background-color: var(--primary-blue);
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+}
+
+.navbar-brand {
+    font-weight: 700;
+    color: var(--text-light) !important;
+    font-size: 1.5rem;
+}
+
+/* Кнопки */
+.btn-primary {
+    background-color: var(--secondary-blue);
+    border-color: var(--secondary-blue);
+    padding: 0.5rem 1.5rem;
+}
+
+/* Карточки */
+.card {
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    transition: transform 0.3s ease;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+}
+
+/* Специальные классы для рыболовной тематики */
+.fish-card {
+    border-left: 4px solid var(--dark-bg);
+}
+
+.ocean-bg {
+    background: linear-gradient(135deg, var(--primary-blue) 0%, var(--dark-bg) 100%);
+    color: white;
+}
+
+.hero-section {
+    position: relative;
+    overflow: hidden;
+    min-height: 500px; 
+    display: flex;
+    align-items: center;
+}
+
+.background-image {
+    background-image: url('/images/fishing.jpg'); 
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    z-index: 1;
+}
+
+.overlay {
+    background-color: rgba(26, 43, 74, 0.7); 
+    z-index: 2;
+}
+
+.hero-section .container {
+    z-index: 3; 
+}
+
+/* Адаптивность для мобильных */
+@media (max-width: 768px) {
+    .hero-section {
+        min-height: 400px;
+    }
+
+        .hero-section h1 {
+            font-size: 2.5rem;
+        }
+}

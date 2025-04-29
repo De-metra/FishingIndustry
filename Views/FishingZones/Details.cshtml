@@ -1,0 +1,95 @@
+﻿@model FishingIndustry.Models.FishingZone
+
+@{
+    ViewData["Title"] = "Детали";
+}
+
+<h1>Информация о водоёме</h1>
+
+<div class="row">
+    <div class="col-md-6">
+        <dl class="row">
+            <dt class="col-sm-4">Название</dt>
+            <dd class="col-sm-8">@Model.Name</dd>
+
+       
+            <dt class="col-sm-4">Широта</dt>
+            <dd class="col-sm-8">@Model.Latitude</dd>
+
+            <dt class="col-sm-4">Долгота</dt>
+            <dd class="col-sm-8">@Model.Longitude</dd>
+          
+            <dt class="col-sm-4">Описание</dt>
+            <dd class="col-sm-8">@Model.Description</dd>
+
+
+            <dt class="col-sm-4">Фауна</dt>
+            <dd class="col-sm-8">
+                @if (Model.FishTypes != null && Model.FishTypes.Any())
+                {
+                    <ul class="list-unstyled">
+                        @foreach (var fish in Model.FishTypes)
+                        {
+                            <li>
+                                <a asp-controller="FishTypes" asp-action="Details" asp-route-id="@fish.Id">
+                                    @fish.Name
+                                </a>
+                            </li>
+                        }
+                    </ul>
+                }
+                else
+                {
+                    <span class="text-muted">Не указаны</span>
+                }
+            </dd>
+        </dl>
+    </div>
+
+    <div class="col-md-6">
+        @if (!string.IsNullOrEmpty(Model.ImagePath))
+        {
+            <img src="@Model.ImagePath" alt="@Model.Name" class="img-fluid rounded border" style="max-height: 400px;" />
+        }
+        else
+        {
+            <p class="text-muted">Изображение не загружено</p>
+        }
+    </div>
+</div>
+
+<hr />
+
+<h4>Расположение на карте</h4>
+<div id="map" style="height: 400px; width: 100%;" class="mb-4"></div>
+
+<div class="mt-4">
+    <a asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-primary">Редактировать</a>
+    <a asp-action="Index" class="btn btn-secondary">Назад</a>
+</div>
+
+@section Scripts {
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+          integrity="sha256-sA+4JtGLd3T7znz7zUKoJ+uZgPB4A1Z3th3a93wB9ss="
+          crossorigin="" />
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+            integrity="sha256-o9N1jKjQGS6lG/X53bFf3PHkVRFOpS2Tt3f2Hnv1xgI="
+            crossorigin=""></script>
+
+    <script>
+        var latitude = @Model.Latitude.ToString(System.Globalization.CultureInfo.InvariantCulture);
+        var longitude = @Model.Longitude.ToString(System.Globalization.CultureInfo.InvariantCulture);
+
+        var map = L.map('map').setView([latitude, longitude], 5);
+
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            attribution: '&copy; OpenStreetMap contributors'
+        }).addTo(map);
+
+        L.marker([latitude, longitude])
+            .addTo(map)
+            .bindPopup("@Model.Name")
+            .openPopup();
+    </script>
+}
+

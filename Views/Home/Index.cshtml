@@ -1,0 +1,63 @@
+﻿@{
+    ViewData["Title"] = "Главная";
+}
+
+<div class="hero-section text-white py-5 mb-5 position-relative">
+ 
+    <div class="overlay position-absolute top-0 start-0 w-100 h-100"></div>
+
+    <div class="background-image position-absolute top-0 start-0 w-100 h-100"></div>
+
+   
+    <div class="container text-center py-5 position-relative">
+        <h1 class="display-4 fw-bold mb-4">Мониторинг рыбопромысловой деятельности</h1>
+        <p class="lead mb-4">Анализ, статистика и управление рыболовными ресурсами</p>
+        <a href="/FishTypes" class="btn btn-primary btn-lg px-4 me-2">
+            <i class="fas fa-fish me-2"></i>Каталог рыб
+        </a>
+        <a href="/Vessels" class="btn btn-outline-light btn-lg px-4">
+            <i class="fas fa-ship me-2"></i>Флот
+        </a>
+    </div>
+</div>
+
+<div class="container">
+    <div class="row g-4">
+
+        <div class="col-md-4">
+            <div class="card fish-card h-100">
+                <div class="card-body">
+                    <h3 class="card-title">
+                        <i class="fas fa-chart-line text-primary me-2"></i>Виды рыб
+                    </h3>
+                    <p class="card-text">Полный каталог промысловых видов с детальной информацией</p>
+                    <a href="/FishTypes" class="btn btn-outline-primary">Перейти</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            <div class="card fish-card h-100">
+                <div class="card-body">
+                    <h3 class="card-title">
+                        <i class="fas fa-water text-primary me-2"></i>Зоны лова
+                    </h3>
+                    <p class="card-text">Информация о промысловых зонах, их местоположение и вылавливаемые виды</p>
+                    <a href="/FishingZones" class="btn btn-outline-primary">Анализ</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            <div class="card fish-card h-100">
+                <div class="card-body">
+                    <h3 class="card-title">
+                        <i class="fas fa-ship text-primary me-2"></i>Флот
+                    </h3>
+                    <p class="card-text">Интерактивная карта судов, самые известные в истории плавбазы</p>
+                    <a href="/Vessels" class="btn btn-outline-primary">Подробнее</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

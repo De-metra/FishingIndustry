@@ -1,0 +1,91 @@
+﻿@model FishingIndustry.ViewModels.FishTypeViewModel
+
+@{
+    ViewData["Title"] = "Редактировать";
+}
+
+<h1>Редактировать</h1>
+
+<hr />
+<div class="row">
+    <div class="col-md-6">
+        <form asp-action="Edit" method="post" enctype="multipart/form-data">
+            <input type="hidden" asp-for="Id" />
+
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+            <div class="form-group">
+                <label asp-for="Name" class="control-label">Название</label>
+                <input asp-for="Name" class="form-control" />
+                <span asp-validation-for="Name" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="Family" class="control-label">Семейство</label>
+                <input asp-for="Family" class="form-control" />
+            </div>
+
+            <div class="form-group">
+                <label asp-for="HabitatType" class="control-label">Место обитания</label>
+                <input asp-for="HabitatType" class="form-control" />
+            </div>
+
+            <div class="form-group">
+                <label asp-for="Description" class="control-label">Описание</label>
+                <input asp-for="Description" class="form-control" />
+                <span asp-validation-for="Description" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="AveragePricePerKg" class="control-label">Цена за кг</label>
+                <input asp-for="AveragePricePerKg" class="form-control" />
+                <span asp-validation-for="AveragePricePerKg" class="text-danger"></span>
+            </div>
+
+                  
+            <div class="form-group">
+                <label>Рыболовные зоны</label>
+                 @if (Model.AllFishingZones != null && Model.AllFishingZones.Any())
+                {
+                @foreach (var zone in Model.AllFishingZones)
+                {
+                    <div class="form-check">
+                        <input class="form-check-input"
+                               type="checkbox"
+                               value="@zone.Value"
+                               name="SelectedZoneIds"
+                               id="zone_@zone.Value"
+                        @(Model.SelectedZoneIds.Contains(int.Parse(zone.Value)) ? "checked" : "") />
+                        <label class="form-check-label" for="zone_@zone.Value">@zone.Text</label>
+                    </div>
+                }
+                }
+                    else
+                    {
+                        <p class="text-muted">Нет доступных мест</p>
+                    }
+            </div>
+
+          
+            <div class="form-group">
+                <label asp-for="ImageUpload" class="control-label">Новое изображение</label>
+                <input asp-for="ImageUpload" type="file" class="form-control" />
+                <span asp-validation-for="ImageUpload" class="text-danger"></span>
+            </div>
+
+            <div class="form-group mt-3">
+                <input type="submit" value="Сохранить" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div class="mt-3">
+    <a asp-action="Index" class="btn btn-secondary">Назад</a>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

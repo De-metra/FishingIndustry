@@ -1,0 +1,48 @@
+﻿@model FishingIndustry.Models.Vessel
+
+@{
+    ViewData["Title"] = "Детали";
+}
+
+<h1>Информация о судне</h1>
+
+<div class="row">
+    <div class="col-md-6">
+        <dl class="row">
+            <dt class="col-sm-4">Название</dt>
+            <dd class="col-sm-8">@Model.Name</dd>
+
+            <dt class="col-sm-4">Регистрационный номер</dt>
+            <dd class="col-sm-8">@Model.RegistrationNumber</dd>
+
+            <dt class="col-sm-4">Тип судна</dt>
+            <dd class="col-sm-8">@Model.TypeVessel</dd>
+
+            <dt class="col-sm-4">Вместимость</dt>
+            <dd class="col-sm-8">@Model.Capacity</dd>
+
+            <dt class="col-sm-4">Описание</dt>
+            <dd class="col-sm-8">@Model.Description</dd>
+
+            <dt class="col-sm-4">Год выпуска</dt>
+            <dd class="col-sm-8">@Model.YearBuilt</dd>
+       
+        </dl>
+    </div>
+
+    <div class="col-md-6">
+        @if (!string.IsNullOrEmpty(Model.ImagePath))
+        {
+            <img src="@Model.ImagePath" alt="@Model.Name" class="img-fluid rounded border" style="max-height: 400px;" />
+        }
+        else
+        {
+            <p class="text-muted">Изображение не загружено</p>
+        }
+    </div>
+</div>
+
+<div class="mt-4">
+    <a asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-primary">Редактировать</a>
+    <a asp-action="Index" class="btn btn-secondary">Назад</a>
+</div>
