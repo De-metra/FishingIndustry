@@ -5,7 +5,11 @@
 **FishingIndustry** — это веб-приложение, разработанное на **ASP.NET Core MVC** с использованием **Entity Framework Core** и **MS SQL Server**, предназначенное для автоматизации процессов промышленного рыболовства.  
 Модуль позволяет вести учёт промысловых видов рыб, рыболовных судов и зон лова, а также управлять этими данными через удобный веб-интерфейс.
 
----
+<img src="wwwroot/images/preview.png">
+<img src="wwwroot/images/map.png">
+<img src="wwwroot/images/viewfishes.png">
+<img src="wwwroot/images/viewaboutfish.png">
+<img src="wwwroot/images/viewvessels.png">
 
 ## ⚙️ Основные возможности
 
